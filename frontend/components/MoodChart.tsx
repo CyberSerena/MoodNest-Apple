@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import { LineChart } from 'react-native-gifted-charts';
+import { View, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { format, parseISO } from 'date-fns';
 
 interface MoodEntry {
@@ -22,38 +21,54 @@ export default function MoodChart({ entries }: MoodChartProps) {
     );
   }
 
-  const chartData = entries
-    .slice(0, 30)
-    .reverse()
-    .map((entry) => ({
-      value: entry.mood_value,
-      label: format(parseISO(entry.timestamp), 'MM/dd'),
-      dataPointText: String(entry.mood_value),
-    }));
+  const chartData = entries.slice(0, 14).reverse();
+  const maxValue = 5;
+  const chartHeight = 200;
+  const chartWidth = Dimensions.get('window').width - 80;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Mood Timeline</Text>
-      <LineChart
-        data={chartData}
-        width={Dimensions.get('window').width - 60}
-        height={220}
-        spacing={40}
-        initialSpacing={10}
-        color="#4CAF50"
-        thickness={3}
-        noOfSections={4}
-        maxValue={5}
-        yAxisColor="#E0E0E0"
-        xAxisColor="#E0E0E0"
-        yAxisTextStyle={{ color: '#666' }}
-        xAxisLabelTextStyle={{ color: '#666', fontSize: 10 }}
-        dataPointsColor="#4CAF50"
-        dataPointsRadius={4}
-        textShiftY={-8}
-        textShiftX={-5}
-        textFontSize={10}
-      />
+      <Text style={styles.title}>Mood Timeline (Last 14 Days)</Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <View style={styles.chartContainer}>
+          {/* Y-axis labels */}
+          <View style={styles.yAxis}>
+            {[5, 4, 3, 2, 1].map((val) => (
+              <Text key={val} style={styles.yAxisLabel}>
+                {val}
+              </Text>
+            ))}
+          </View>
+
+          {/* Chart bars */}
+          <View style={styles.barsContainer}>
+            <View style={styles.gridLines}>
+              {[5, 4, 3, 2, 1].map((val) => (
+                <View key={val} style={styles.gridLine} />
+              ))}
+            </View>
+            
+            <View style={styles.bars}>
+              {chartData.map((entry, index) => {
+                const barHeight = (entry.mood_value / maxValue) * chartHeight;
+                const moodColors = ['#FF6B6B', '#FFA07A', '#FFD700', '#90EE90', '#4CAF50'];
+                const barColor = moodColors[entry.mood_value - 1];
+                
+                return (
+                  <View key={index} style={styles.barWrapper}>
+                    <View style={[styles.bar, { height: barHeight, backgroundColor: barColor }]}>
+                      <Text style={styles.barValue}>{entry.mood_value}</Text>
+                    </View>
+                    <Text style={styles.barLabel}>
+                      {format(parseISO(entry.timestamp), 'MM/dd')}
+                    </Text>
+                  </View>
+                );
+              })}
+            </View>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 }
