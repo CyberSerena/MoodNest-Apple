@@ -42,10 +42,6 @@ export default function MoodChart({ entries }: MoodChartProps) {
         initialSpacing={10}
         color="#4CAF50"
         thickness={3}
-        startFillColor="rgba(76, 175, 80, 0.3)"
-        endFillColor="rgba(76, 175, 80, 0.1)"
-        startOpacity={0.9}
-        endOpacity={0.2}
         noOfSections={4}
         maxValue={5}
         yAxisColor="#E0E0E0"
@@ -57,7 +53,6 @@ export default function MoodChart({ entries }: MoodChartProps) {
         textShiftY={-8}
         textShiftX={-5}
         textFontSize={10}
-        areaChart
       />
     </View>
   );
