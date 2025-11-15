@@ -98,4 +98,62 @@ const styles = StyleSheet.create({
     color: '#999',
     marginTop: 8,
   },
+  chartContainer: {
+    flexDirection: 'row',
+    height: 240,
+    paddingVertical: 10,
+  },
+  yAxis: {
+    justifyContent: 'space-between',
+    paddingRight: 8,
+    height: 200,
+  },
+  yAxisLabel: {
+    fontSize: 12,
+    color: '#666',
+  },
+  barsContainer: {
+    flex: 1,
+    position: 'relative',
+  },
+  gridLines: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 200,
+    justifyContent: 'space-between',
+  },
+  gridLine: {
+    height: 1,
+    backgroundColor: '#E0E0E0',
+  },
+  bars: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    height: 200,
+    gap: 8,
+  },
+  barWrapper: {
+    alignItems: 'center',
+    width: 40,
+  },
+  bar: {
+    width: 32,
+    borderRadius: 4,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingTop: 4,
+    minHeight: 30,
+  },
+  barValue: {
+    color: '#FFF',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  barLabel: {
+    fontSize: 10,
+    color: '#666',
+    marginTop: 4,
+  },
 });
