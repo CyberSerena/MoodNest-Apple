@@ -387,4 +387,28 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
+  menuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#FFF',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  menuLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 16,
+  },
+  menuText: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#333',
+  },
 });
