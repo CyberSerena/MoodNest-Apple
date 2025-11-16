@@ -98,6 +98,13 @@ export default function TabsLayout() {
           title: 'Goals',
         }}
       />
+      <Tabs.Screen
+        name="subscription"
+        options={{
+          href: null,
+          title: 'Upgrade to Premium',
+        }}
+      />
     </Tabs>
   );
 }
