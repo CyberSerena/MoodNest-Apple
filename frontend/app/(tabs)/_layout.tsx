@@ -17,7 +17,7 @@ export default function TabsLayout() {
           paddingTop: 8,
         },
         tabBarLabelStyle: {
-          fontSize: 12,
+          fontSize: 10,
           fontWeight: '600',
         },
         headerShown: false,
@@ -26,9 +26,9 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: 'Check-in',
+          title: 'Home',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="happy-outline" size={size} color={color} />
+            <Ionicons name="home-outline" size={size} color={color} />
           ),
         }}
       />
@@ -42,24 +42,6 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="predictions"
-        options={{
-          title: 'Forecast',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="bulb-outline" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="journal"
-        options={{
-          title: 'Journal',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="book-outline" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="worry-tree"
         options={{
           title: 'Worry Tree',
@@ -69,12 +51,51 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="achievements"
+        options={{
+          title: 'Rewards',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="trophy-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile',
-          tabBarIcon: ({ color, size}) => (
-            <Ionicons name="person-outline" size={size} color={color} />
+          title: 'More',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="menu-outline" size={size} color={color} />
           ),
+        }}
+      />
+      
+      {/* Hidden tabs - accessible from Profile/More */}
+      <Tabs.Screen
+        name="predictions"
+        options={{
+          href: null,
+          title: 'Forecast',
+        }}
+      />
+      <Tabs.Screen
+        name="journal"
+        options={{
+          href: null,
+          title: 'Journal',
+        }}
+      />
+      <Tabs.Screen
+        name="advanced"
+        options={{
+          href: null,
+          title: 'Advanced Analytics',
+        }}
+      />
+      <Tabs.Screen
+        name="goals"
+        options={{
+          href: null,
+          title: 'Goals',
         }}
       />
     </Tabs>
