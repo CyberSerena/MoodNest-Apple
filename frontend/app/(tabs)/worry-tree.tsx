@@ -273,56 +273,67 @@ export default function WorryTree() {
         transparent={true}
         onRequestClose={() => setShowNewWorryModal(false)}
       >
-        <View style={styles.modalOverlay}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.modalOverlay}
+        >
+          <TouchableOpacity 
+            style={styles.modalBackdrop} 
+            activeOpacity={1} 
+            onPress={() => setShowNewWorryModal(false)}
+          />
           <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Add New Worry</Text>
-            
-            <Text style={styles.inputLabel}>What's worrying you?</Text>
-            <TextInput
-              style={styles.textArea}
-              placeholder="Describe your worry..."
-              value={newWorry.text}
-              onChangeText={(text) => setNewWorry({ ...newWorry, text })}
-              multiline
-              numberOfLines={4}
-            />
+            <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+              <Text style={styles.modalTitle}>Add New Worry</Text>
+              
+              <Text style={styles.inputLabel}>What's worrying you?</Text>
+              <TextInput
+                style={styles.textArea}
+                placeholder="Describe your worry..."
+                value={newWorry.text}
+                onChangeText={(text) => setNewWorry({ ...newWorry, text })}
+                multiline
+                numberOfLines={4}
+                textAlignVertical="top"
+              />
 
-            <Text style={styles.inputLabel}>Intensity (1-10)</Text>
-            <View style={styles.intensityContainer}>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-                <TouchableOpacity
-                  key={num}
-                  style={[
-                    styles.intensityButton,
-                    newWorry.intensity === num && styles.intensityButtonActive,
-                  ]}
-                  onPress={() => setNewWorry({ ...newWorry, intensity: num })}
-                >
-                  <Text
+              <Text style={styles.inputLabel}>Intensity (1-10)</Text>
+              <View style={styles.intensityContainer}>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                  <TouchableOpacity
+                    key={num}
                     style={[
-                      styles.intensityText,
-                      newWorry.intensity === num && styles.intensityTextActive,
+                      styles.intensityButton,
+                      newWorry.intensity === num && styles.intensityButtonActive,
                     ]}
+                    onPress={() => setNewWorry({ ...newWorry, intensity: num })}
                   >
-                    {num}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
+                    <Text
+                      style={[
+                        styles.intensityText,
+                        newWorry.intensity === num && styles.intensityTextActive,
+                      ]}
+                    >
+                      {num}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
 
-            <View style={styles.modalButtons}>
-              <TouchableOpacity
-                style={styles.modalCancelButton}
-                onPress={() => setShowNewWorryModal(false)}
-              >
-                <Text style={styles.modalCancelText}>Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.modalSaveButton} onPress={handleAddWorry}>
-                <Text style={styles.modalSaveText}>Add Worry</Text>
-              </TouchableOpacity>
-            </View>
+              <View style={styles.modalButtons}>
+                <TouchableOpacity
+                  style={styles.modalCancelButton}
+                  onPress={() => setShowNewWorryModal(false)}
+                >
+                  <Text style={styles.modalCancelText}>Cancel</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.modalSaveButton} onPress={handleAddWorry}>
+                  <Text style={styles.modalSaveText}>Add Worry</Text>
+                </TouchableOpacity>
+              </View>
+            </ScrollView>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </Modal>
     </SafeAreaView>
   );
