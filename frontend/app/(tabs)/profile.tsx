@@ -89,6 +89,51 @@ export default function Profile() {
           <Text style={styles.userEmail}>{user?.email}</Text>
         </View>
 
+        {/* Premium Features Section */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Premium Features</Text>
+
+          <Link href="/(tabs)/advanced" asChild>
+            <TouchableOpacity style={styles.menuItem}>
+              <View style={styles.menuLeft}>
+                <Ionicons name="analytics" size={24} color="#4CAF50" />
+                <Text style={styles.menuText}>Advanced Analytics</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={24} color="#CCC" />
+            </TouchableOpacity>
+          </Link>
+
+          <Link href="/(tabs)/predictions" asChild>
+            <TouchableOpacity style={styles.menuItem}>
+              <View style={styles.menuLeft}>
+                <Ionicons name="bulb" size={24} color="#4CAF50" />
+                <Text style={styles.menuText}>AI Predictions</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={24} color="#CCC" />
+            </TouchableOpacity>
+          </Link>
+
+          <Link href="/(tabs)/journal" asChild>
+            <TouchableOpacity style={styles.menuItem}>
+              <View style={styles.menuLeft}>
+                <Ionicons name="book" size={24} color="#4CAF50" />
+                <Text style={styles.menuText}>Journal</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={24} color="#CCC" />
+            </TouchableOpacity>
+          </Link>
+
+          <Link href="/(tabs)/goals" asChild>
+            <TouchableOpacity style={styles.menuItem}>
+              <View style={styles.menuLeft}>
+                <Ionicons name="flag" size={24} color="#4CAF50" />
+                <Text style={styles.menuText}>Goals</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={24} color="#CCC" />
+            </TouchableOpacity>
+          </Link>
+        </View>
+
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Settings</Text>
 
