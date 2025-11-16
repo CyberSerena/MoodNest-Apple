@@ -1,7 +1,6 @@
-import React from 'react';
-import { Stack, useRouter, useSegments } from 'expo-router';
+import React, { useEffect } from 'react';
+import { Slot, useRouter, useSegments } from 'expo-router';
 import { AuthProvider, useAuth } from '../contexts/AuthContext';
-import { useEffect } from 'react';
 
 function RootLayoutNav() {
   const { user, isLoading } = useAuth();
@@ -21,13 +20,7 @@ function RootLayoutNav() {
     }
   }, [user, segments, isLoading]);
 
-  return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-    </Stack>
-  );
+  return <Slot />;
 }
 
 export default function RootLayout() {
