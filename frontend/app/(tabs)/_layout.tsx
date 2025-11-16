@@ -60,10 +60,19 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="worry-tree"
+        options={{
+          title: 'Worry Tree',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="git-branch-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color, size}) => (
             <Ionicons name="person-outline" size={size} color={color} />
           ),
         }}
