@@ -89,6 +89,20 @@ export default function Profile() {
           <Text style={styles.userEmail}>{user?.email}</Text>
         </View>
 
+        {/* Upgrade to Premium Banner */}
+        <Link href="/(tabs)/subscription" asChild>
+          <TouchableOpacity style={styles.premiumBanner}>
+            <View style={styles.premiumBannerContent}>
+              <Ionicons name="sparkles" size={32} color="#FFD700" />
+              <View style={styles.premiumBannerText}>
+                <Text style={styles.premiumBannerTitle}>Upgrade to Premium</Text>
+                <Text style={styles.premiumBannerDesc}>Unlock all features</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={24} color="#FFF" />
+            </View>
+          </TouchableOpacity>
+        </Link>
+
         {/* Premium Features Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Premium Features</Text>
