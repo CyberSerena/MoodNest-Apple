@@ -13,7 +13,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../contexts/AuthContext';
 import api from '../../utils/api';
-import { useRouter } from 'expo-router';
+import { useRouter, Link } from 'expo-router';
 
 export default function Profile() {
   const { user, logout, updateUser } = useAuth();
