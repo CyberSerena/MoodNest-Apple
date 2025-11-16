@@ -440,6 +440,106 @@ async def get_predictions(user = Depends(get_current_user)):
         for pred in predictions
     ]
 
+# Worry Tree Models
+class WorryCreate(BaseModel):
+    worry_text: str
+    intensity: int = Field(ge=1, le=10)
+
+class WorryUpdate(BaseModel):
+    category: Optional[str] = None
+    intensity: Optional[int] = None
+
+class WorryResponse(BaseModel):
+    id: str
+    user_id: str
+    worry_text: str
+    category: str  # let_go, take_action, scheduled, resolved
+    intensity: int
+    created_at: datetime
+    resolved_at: Optional[datetime] = None
+
+# Worry Tree Routes
+@api_router.post("/worry-tree")
+async def create_worry(worry_data: WorryCreate, user = Depends(get_current_user)):
+    worry_id = str(uuid.uuid4())
+    worry = {
+        "_id": worry_id,
+        "user_id": user["_id"],
+        "worry_text": worry_data.worry_text,
+        "category": "take_action",  # Default category
+        "intensity": worry_data.intensity,
+        "created_at": datetime.utcnow(),
+        "resolved_at": None
+    }
+    
+    await db.worries.insert_one(worry)
+    
+    return WorryResponse(
+        id=worry_id,
+        user_id=user["_id"],
+        worry_text=worry["worry_text"],
+        category=worry["category"],
+        intensity=worry["intensity"],
+        created_at=worry["created_at"],
+        resolved_at=worry.get("resolved_at")
+    )
+
+@api_router.get("/worry-tree")
+async def get_worries(user = Depends(get_current_user)):
+    worries = await db.worries.find({
+        "user_id": user["_id"]
+    }).sort("created_at", -1).to_list(1000)
+    
+    return [
+        WorryResponse(
+            id=worry["_id"],
+            user_id=worry["user_id"],
+            worry_text=worry["worry_text"],
+            category=worry["category"],
+            intensity=worry["intensity"],
+            created_at=worry["created_at"],
+            resolved_at=worry.get("resolved_at")
+        )
+        for worry in worries
+    ]
+
+@api_router.put("/worry-tree/{worry_id}")
+async def update_worry(worry_id: str, update_data: WorryUpdate, user = Depends(get_current_user)):
+    update_dict = {k: v for k, v in update_data.dict().items() if v is not None}
+    
+    # If marking as resolved, add resolved_at timestamp
+    if update_dict.get("category") == "resolved":
+        update_dict["resolved_at"] = datetime.utcnow()
+    
+    result = await db.worries.update_one(
+        {"_id": worry_id, "user_id": user["_id"]},
+        {"$set": update_dict}
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Worry not found")
+    
+    updated_worry = await db.worries.find_one({"_id": worry_id})
+    
+    return WorryResponse(
+        id=updated_worry["_id"],
+        user_id=updated_worry["user_id"],
+        worry_text=updated_worry["worry_text"],
+        category=updated_worry["category"],
+        intensity=updated_worry["intensity"],
+        created_at=updated_worry["created_at"],
+        resolved_at=updated_worry.get("resolved_at")
+    )
+
+@api_router.delete("/worry-tree/{worry_id}")
+async def delete_worry(worry_id: str, user = Depends(get_current_user)):
+    result = await db.worries.delete_one({"_id": worry_id, "user_id": user["_id"]})
+    
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Worry not found")
+    
+    return {"message": "Worry deleted successfully"}
+
 # Include router
 app.include_router(api_router)
 
