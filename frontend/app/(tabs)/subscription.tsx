@@ -25,16 +25,16 @@ export default function Subscription() {
     monthly: {
       id: 'monthly',
       name: 'Monthly Premium',
-      price: 9.99,
+      price: 2.99,
       period: 'month',
       savings: null,
     },
     yearly: {
       id: 'yearly',
       name: 'Yearly Premium',
-      price: 99.99,
+      price: 35.99,
       period: 'year',
-      savings: '$20',
+      savings: '$0.01',
     },
   };
 
