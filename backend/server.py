@@ -684,7 +684,7 @@ STRIPE_API_KEY = os.environ.get('STRIPE_API_KEY', 'sk_test_emergent')
 # Subscription Packages - DO NOT ACCEPT FROM FRONTEND
 SUBSCRIPTION_PACKAGES = {
     "monthly": {"amount": 2.99, "currency": "usd", "name": "Monthly Premium"},
-    "yearly": {"amount": 35.99, "currency": "usd", "name": "Yearly Premium"},
+    "yearly": {"amount": 29.99, "currency": "usd", "name": "Yearly Premium"},
 }
 
 class SubscriptionRequest(BaseModel):
