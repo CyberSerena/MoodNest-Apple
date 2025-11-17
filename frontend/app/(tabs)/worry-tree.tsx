@@ -512,6 +512,55 @@ export default function WorryTree() {
           </View>
         </KeyboardAvoidingView>
       </Modal>
+
+      {/* Resolution Note Modal */}
+      <Modal
+        visible={showResolutionModal}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setShowResolutionModal(false)}
+      >
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.modalOverlay}
+        >
+          <TouchableOpacity 
+            style={styles.modalBackdrop} 
+            activeOpacity={1} 
+            onPress={() => setShowResolutionModal(false)}
+          />
+          <View style={styles.modalContent}>
+            <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+              <Text style={styles.modalTitle}>✅ Resolve Worry</Text>
+              
+              <Text style={styles.worryTextPreview}>{resolvingWorry?.text}</Text>
+              
+              <Text style={styles.inputLabel}>How did you resolve this? (Optional)</Text>
+              <TextInput
+                style={styles.textArea}
+                placeholder="E.g., Talked to someone, made a plan, took action..."
+                value={resolutionNote}
+                onChangeText={setResolutionNote}
+                multiline
+                numberOfLines={4}
+                textAlignVertical="top"
+              />
+
+              <View style={styles.modalButtons}>
+                <TouchableOpacity
+                  style={styles.modalCancelButton}
+                  onPress={() => setShowResolutionModal(false)}
+                >
+                  <Text style={styles.modalCancelText}>Cancel</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.modalSaveButton} onPress={confirmResolve}>
+                  <Text style={styles.modalSaveText}>Mark as Resolved</Text>
+                </TouchableOpacity>
+              </View>
+            </ScrollView>
+          </View>
+        </KeyboardAvoidingView>
+      </Modal>
     </SafeAreaView>
   );
 }
