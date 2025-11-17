@@ -142,9 +142,9 @@ export default function WorryTree() {
         {/* Statistics Cards */}
         <View style={styles.statsContainer}>
           <View style={styles.statCard}>
-            <Text style={styles.statIcon}>💧</Text>
-            <Text style={styles.statValue}>{stats.total}</Text>
-            <Text style={styles.statLabel}>Total Worries</Text>
+            <Text style={styles.statIcon}>⚡</Text>
+            <Text style={styles.statValue}>{stats.active}</Text>
+            <Text style={styles.statLabel}>Active Worries</Text>
           </View>
           <View style={styles.statCard}>
             <Text style={styles.statIcon}>✅</Text>
@@ -152,9 +152,9 @@ export default function WorryTree() {
             <Text style={styles.statLabel}>Resolved</Text>
           </View>
           <View style={styles.statCard}>
-            <Text style={styles.statIcon}>🎯</Text>
-            <Text style={styles.statValue}>{stats.resolutionRate}%</Text>
-            <Text style={styles.statLabel}>Resolution Rate</Text>
+            <Text style={styles.statIcon}>📊</Text>
+            <Text style={styles.statValue}>{stats.total}</Text>
+            <Text style={styles.statLabel}>Total</Text>
           </View>
           <View style={styles.statCard}>
             <Text style={styles.statIcon}>💚</Text>
