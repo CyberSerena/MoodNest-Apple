@@ -23,6 +23,7 @@ interface Worry {
   intensity: number;
   created_at: string;
   resolved_at?: string;
+  resolution_note?: string;
 }
 
 export default function WorryTree() {
