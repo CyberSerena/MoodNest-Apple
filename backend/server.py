@@ -542,6 +542,142 @@ async def delete_worry(worry_id: str, user = Depends(get_current_user)):
     
     return {"message": "Worry deleted successfully"}
 
+# Achievements Routes
+@api_router.get("/achievements")
+async def get_achievements(user = Depends(get_current_user)):
+    # Get user stats
+    mood_count = await db.mood_entries.count_documents({"user_id": user["_id"]})
+    worry_count = await db.worries.count_documents({"user_id": user["_id"]})
+    resolved_worries = await db.worries.count_documents({"user_id": user["_id"], "category": "resolved"})
+    
+    # Calculate streak
+    mood_entries = await db.mood_entries.find({"user_id": user["_id"]}).sort("timestamp", -1).to_list(1000)
+    current_streak = 0
+    longest_streak = 0
+    
+    if mood_entries:
+        dates = set()
+        for entry in mood_entries:
+            dates.add(entry["timestamp"].date())
+        
+        sorted_dates = sorted(dates, reverse=True)
+        current_streak = 1
+        temp_streak = 1
+        
+        for i in range(len(sorted_dates) - 1):
+            diff = (sorted_dates[i] - sorted_dates[i + 1]).days
+            if diff == 1:
+                temp_streak += 1
+                if i == 0:
+                    current_streak = temp_streak
+            else:
+                temp_streak = 1
+            longest_streak = max(longest_streak, temp_streak)
+        
+        longest_streak = max(longest_streak, current_streak)
+    
+    # Count happy moods (4 or 5)
+    happy_moods = await db.mood_entries.count_documents({
+        "user_id": user["_id"],
+        "mood_value": {"$gte": 4}
+    })
+    
+    # Define achievements
+    achievements = [
+        {
+            "id": "1",
+            "title": "First Step",
+            "description": "Log your first mood entry",
+            "icon": "🌟",
+            "unlocked": mood_count >= 1,
+            "progress": min(mood_count, 1),
+            "requirement": 1
+        },
+        {
+            "id": "2",
+            "title": "Week Warrior",
+            "description": "Log moods for 7 days in a row",
+            "icon": "🔥",
+            "unlocked": current_streak >= 7,
+            "progress": min(current_streak, 7),
+            "requirement": 7
+        },
+        {
+            "id": "3",
+            "title": "Month Master",
+            "description": "Log moods for 30 days in a row",
+            "icon": "🏆",
+            "unlocked": current_streak >= 30,
+            "progress": min(current_streak, 30),
+            "requirement": 30
+        },
+        {
+            "id": "4",
+            "title": "Century Club",
+            "description": "Log 100 mood entries",
+            "icon": "💯",
+            "unlocked": mood_count >= 100,
+            "progress": min(mood_count, 100),
+            "requirement": 100
+        },
+        {
+            "id": "5",
+            "title": "Happy Days",
+            "description": "Log 10 very good moods",
+            "icon": "😄",
+            "unlocked": happy_moods >= 10,
+            "progress": min(happy_moods, 10),
+            "requirement": 10
+        },
+        {
+            "id": "6",
+            "title": "Growth Mindset",
+            "description": "Log 50 journal entries",
+            "icon": "🌱",
+            "unlocked": False,
+            "progress": 0,
+            "requirement": 50
+        },
+        {
+            "id": "7",
+            "title": "Worry Warrior",
+            "description": "Create 10 worry trees",
+            "icon": "🌳",
+            "unlocked": worry_count >= 10,
+            "progress": min(worry_count, 10),
+            "requirement": 10
+        },
+        {
+            "id": "8",
+            "title": "Peace Seeker",
+            "description": "Resolve 20 worries",
+            "icon": "🕊️",
+            "unlocked": resolved_worries >= 20,
+            "progress": min(resolved_worries, 20),
+            "requirement": 20
+        },
+        {
+            "id": "9",
+            "title": "Consistent Tracker",
+            "description": "Log moods for 365 days",
+            "icon": "📅",
+            "unlocked": current_streak >= 365,
+            "progress": min(current_streak, 365),
+            "requirement": 365
+        }
+    ]
+    
+    unlocked_count = len([a for a in achievements if a["unlocked"]])
+    
+    return {
+        "achievements": achievements,
+        "stats": {
+            "progress": unlocked_count,
+            "total": len(achievements),
+            "completion": round((unlocked_count / len(achievements)) * 100)
+        }
+    }
+
 # Stripe Payment Integration
 STRIPE_API_KEY = os.environ.get('STRIPE_API_KEY', 'sk_test_emergent')
 
