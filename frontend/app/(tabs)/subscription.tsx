@@ -32,9 +32,9 @@ export default function Subscription() {
     yearly: {
       id: 'yearly',
       name: 'Yearly Premium',
-      price: 35.99,
+      price: 29.99,
       period: 'year',
-      savings: '$0.01',
+      savings: '$6.00',
     },
   };
 
