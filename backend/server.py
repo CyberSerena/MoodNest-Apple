@@ -460,6 +460,7 @@ class WorryResponse(BaseModel):
     intensity: int
     created_at: datetime
     resolved_at: Optional[datetime] = None
+    resolution_note: Optional[str] = None
 
 # Worry Tree Routes
 @api_router.post("/worry-tree")
