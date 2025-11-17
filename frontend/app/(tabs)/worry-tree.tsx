@@ -83,13 +83,39 @@ export default function WorryTree() {
     }
   };
 
-  const handleCategorizeWorry = async (worryId: string, category: string) => {
+  const handleCategorizeWorry = async (worryId: string, category: string, resolutionNote?: string) => {
     try {
-      await api.put(`/worry-tree/${worryId}`, { category });
+      const payload: any = { category };
+      if (category === 'resolved' && resolutionNote) {
+        payload.resolution_note = resolutionNote;
+      }
+      await api.put(`/worry-tree/${worryId}`, payload);
       fetchWorries();
     } catch (error) {
       Alert.alert('Error', 'Failed to update worry');
     }
+  };
+
+  const handleResolveWithNote = (worryId: string, worryText: string) => {
+    Alert.prompt(
+      'Resolve Worry',
+      `How did you resolve: "${worryText}"?`,
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Resolve',
+          onPress: (note) => {
+            handleCategorizeWorry(worryId, 'resolved', note || undefined);
+          },
+        },
+      ],
+      'plain-text',
+      '',
+      'default'
+    );
   };
 
   if (isLoading) {
