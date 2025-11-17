@@ -244,7 +244,7 @@ export default function WorryTree() {
                         { text: 'Cancel', style: 'cancel' },
                         {
                           text: '✅ Resolve',
-                          onPress: () => handleCategorizeWorry(worry.id, 'resolved'),
+                          onPress: () => handleResolveWithNote(worry.id, worry.worry_text),
                         },
                         {
                           text: '🌱 Take Action',
@@ -290,7 +290,7 @@ export default function WorryTree() {
                         { text: 'Cancel', style: 'cancel' },
                         {
                           text: '✅ Resolve',
-                          onPress: () => handleCategorizeWorry(worry.id, 'resolved'),
+                          onPress: () => handleResolveWithNote(worry.id, worry.worry_text),
                         },
                         {
                           text: '🍃 Let Go',
@@ -336,7 +336,7 @@ export default function WorryTree() {
                         { text: 'Cancel', style: 'cancel' },
                         {
                           text: '✅ Resolve',
-                          onPress: () => handleCategorizeWorry(worry.id, 'resolved'),
+                          onPress: () => handleResolveWithNote(worry.id, worry.worry_text),
                         },
                         {
                           text: '🍃 Let Go',
