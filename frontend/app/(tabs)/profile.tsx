@@ -435,6 +435,32 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#333',
   },
+  featuresList: {
+    marginTop: 16,
+    paddingTop: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#F0F0F0',
+  },
+  featuresTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 8,
+  },
+  upgradeHint: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    backgroundColor: '#E8F5E9',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 8,
+  },
+  upgradeText: {
+    fontSize: 13,
+    color: '#4CAF50',
+    fontWeight: '500',
+  },
   premiumBanner: {
     backgroundColor: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     backgroundColor: '#4CAF50',
