@@ -49,14 +49,16 @@ export default function WorryTree() {
     }
   };
 
+  const activeWorries = worries.filter((w) => w.category !== 'resolved');
+  const resolvedWorries = worries.filter((w) => w.category === 'resolved');
+  
   const stats = {
     total: worries.length,
-    resolved: worries.filter((w) => w.category === 'resolved').length,
-    resolutionRate: worries.length > 0 ? Math.round((worries.filter((w) => w.category === 'resolved').length / worries.length) * 100) : 0,
+    active: activeWorries.length,
+    resolved: resolvedWorries.length,
+    resolutionRate: worries.length > 0 ? Math.round((resolvedWorries.length / worries.length) * 100) : 0,
     avgIntensity: worries.length > 0 ? (worries.reduce((sum, w) => sum + w.intensity, 0) / worries.length).toFixed(1) : '0',
   };
-
-  const activeWorries = worries.filter((w) => w.category !== 'resolved');
   const categorizedWorries = {
     let_go: worries.filter((w) => w.category === 'let_go'),
     take_action: worries.filter((w) => w.category === 'take_action'),
