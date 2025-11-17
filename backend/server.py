@@ -536,7 +536,8 @@ async def update_worry(worry_id: str, update_data: WorryUpdate, user = Depends(g
         category=updated_worry["category"],
         intensity=updated_worry["intensity"],
         created_at=updated_worry["created_at"],
-        resolved_at=updated_worry.get("resolved_at")
+        resolved_at=updated_worry.get("resolved_at"),
+        resolution_note=updated_worry.get("resolution_note")
     )
 
 @api_router.delete("/worry-tree/{worry_id}")
