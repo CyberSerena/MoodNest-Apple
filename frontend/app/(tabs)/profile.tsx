@@ -210,11 +210,21 @@ export default function Profile() {
 
           <View style={styles.aboutCard}>
             <Text style={styles.aboutTitle}>🌿 MoodNest</Text>
-            <Text style={styles.aboutVersion}>Version 1.0.0</Text>
+            <Text style={styles.aboutVersion}>Version 2.0.0</Text>
             <Text style={styles.aboutDescription}>
               Track, predict, and prepare for your emotional journey with AI-powered
               insights and personalized coping strategies.
             </Text>
+            
+            <View style={styles.featuresList}>
+              <Text style={styles.featuresTitle}>Your Plan: {user?.subscription_status === 'active' ? 'Premium' : 'Standard'}</Text>
+              {user?.subscription_status !== 'active' && (
+                <View style={styles.upgradeHint}>
+                  <Ionicons name="sparkles" size={16} color="#4CAF50" />
+                  <Text style={styles.upgradeText}>Upgrade for unlimited features</Text>
+                </View>
+              )}
+            </View>
           </View>
         </View>
 
