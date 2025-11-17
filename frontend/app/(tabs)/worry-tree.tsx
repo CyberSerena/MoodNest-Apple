@@ -102,25 +102,18 @@ export default function WorryTree() {
   };
 
   const handleResolveWithNote = (worryId: string, worryText: string) => {
-    Alert.prompt(
-      'Resolve Worry',
-      `How did you resolve: "${worryText}"?`,
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'Resolve',
-          onPress: (note) => {
-            handleCategorizeWorry(worryId, 'resolved', note || undefined);
-          },
-        },
-      ],
-      'plain-text',
-      '',
-      'default'
-    );
+    setResolvingWorry({ id: worryId, text: worryText });
+    setResolutionNote('');
+    setShowResolutionModal(true);
+  };
+
+  const confirmResolve = async () => {
+    if (resolvingWorry) {
+      await handleCategorizeWorry(resolvingWorry.id, 'resolved', resolutionNote || undefined);
+      setShowResolutionModal(false);
+      setResolvingWorry(null);
+      setResolutionNote('');
+    }
   };
 
   if (isLoading) {
