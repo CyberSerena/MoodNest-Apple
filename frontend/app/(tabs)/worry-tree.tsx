@@ -534,51 +534,80 @@ const styles = StyleSheet.create({
     color: '#666',
     textAlign: 'center',
   },
-  guideContainer: {
-    backgroundColor: '#FFF',
-    borderRadius: 16,
-    padding: 20,
-    marginBottom: 20,
+  categoriesContainer: {
+    marginTop: 20,
   },
-  guideTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 16,
+  categoriesTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 20,
     textAlign: 'center',
   },
-  categoriesGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-  },
-  categoryCard: {
-    flex: 1,
-    minWidth: '45%',
-    backgroundColor: '#F5F5F5',
-    borderRadius: 12,
+  categorySection: {
+    backgroundColor: '#FFF',
+    borderRadius: 16,
     padding: 16,
+    marginBottom: 16,
+  },
+  categoryHeader: {
+    flexDirection: 'row',
     alignItems: 'center',
+    gap: 12,
+    marginBottom: 12,
+    paddingBottom: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0',
   },
   categoryIcon: {
     fontSize: 32,
-    marginBottom: 8,
+  },
+  categoryHeaderText: {
+    flex: 1,
   },
   categoryTitle: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '600',
     color: '#333',
-    marginBottom: 4,
-  },
-  categoryCount: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#4CAF50',
-    marginBottom: 4,
+    marginBottom: 2,
   },
   categoryDesc: {
     fontSize: 12,
     color: '#999',
+  },
+  emptyCategory: {
+    fontSize: 14,
+    color: '#999',
+    fontStyle: 'italic',
     textAlign: 'center',
+    paddingVertical: 12,
+  },
+  worryItemSmall: {
+    backgroundColor: '#F9F9F9',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  worryResolved: {
+    backgroundColor: '#E8F5E9',
+  },
+  worryTextSmall: {
+    flex: 1,
+    fontSize: 14,
+    color: '#333',
+  },
+  worryTextResolved: {
+    textDecorationLine: 'line-through',
+    color: '#999',
+  },
+  worryIntensitySmall: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#666',
+    marginLeft: 8,
   },
   listContainer: {
     marginTop: 20,
