@@ -850,6 +850,17 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   },
+  worryTextPreview: {
+    fontSize: 16,
+    color: '#666',
+    fontStyle: 'italic',
+    textAlign: 'center',
+    marginBottom: 20,
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+    backgroundColor: '#F9F9F9',
+    borderRadius: 8,
+  },
   inputLabel: {
     fontSize: 16,
     fontWeight: '500',
