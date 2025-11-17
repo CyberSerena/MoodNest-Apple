@@ -450,6 +450,7 @@ class WorryCreate(BaseModel):
 class WorryUpdate(BaseModel):
     category: Optional[str] = None
     intensity: Optional[int] = None
+    resolution_note: Optional[str] = None
 
 class WorryResponse(BaseModel):
     id: str
