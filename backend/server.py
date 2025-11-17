@@ -513,6 +513,9 @@ async def update_worry(worry_id: str, update_data: WorryUpdate, user = Depends(g
     # If marking as resolved, add resolved_at timestamp
     if update_dict.get("category") == "resolved":
         update_dict["resolved_at"] = datetime.utcnow()
+        # Store resolution note if provided
+        if update_data.resolution_note:
+            update_dict["resolution_note"] = update_data.resolution_note
     
     result = await db.worries.update_one(
         {"_id": worry_id, "user_id": user["_id"]},
