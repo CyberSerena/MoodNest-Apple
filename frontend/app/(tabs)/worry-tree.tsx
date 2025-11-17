@@ -207,10 +207,35 @@ export default function WorryTree() {
               <Text style={styles.emptyCategory}>No worries in this category</Text>
             ) : (
               categorizedWorries.let_go.map((worry) => (
-                <View key={worry.id} style={styles.worryItemSmall}>
+                <TouchableOpacity
+                  key={worry.id}
+                  style={styles.worryItemSmall}
+                  onPress={() => {
+                    Alert.alert(
+                      'Worry Actions',
+                      worry.worry_text,
+                      [
+                        { text: 'Cancel', style: 'cancel' },
+                        {
+                          text: '✅ Resolve',
+                          onPress: () => handleCategorizeWorry(worry.id, 'resolved'),
+                        },
+                        {
+                          text: '🌱 Take Action',
+                          onPress: () => handleCategorizeWorry(worry.id, 'take_action'),
+                        },
+                        {
+                          text: '🍂 Schedule',
+                          onPress: () => handleCategorizeWorry(worry.id, 'scheduled'),
+                        },
+                      ],
+                      { cancelable: true }
+                    );
+                  }}
+                >
                   <Text style={styles.worryTextSmall}>{worry.worry_text}</Text>
                   <Text style={styles.worryIntensitySmall}>⚡{worry.intensity}</Text>
-                </View>
+                </TouchableOpacity>
               ))
             )}
           </View>
