@@ -792,6 +792,20 @@ const styles = StyleSheet.create({
     color: '#666',
     marginLeft: 8,
   },
+  resolvedWorryContent: {
+    flex: 1,
+  },
+  resolutionIndicator: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    marginTop: 4,
+  },
+  resolutionIndicatorText: {
+    fontSize: 11,
+    color: '#4CAF50',
+    fontWeight: '500',
+  },
   listContainer: {
     marginTop: 20,
   },
