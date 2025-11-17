@@ -253,10 +253,35 @@ export default function WorryTree() {
               <Text style={styles.emptyCategory}>No worries in this category</Text>
             ) : (
               categorizedWorries.take_action.map((worry) => (
-                <View key={worry.id} style={styles.worryItemSmall}>
+                <TouchableOpacity
+                  key={worry.id}
+                  style={styles.worryItemSmall}
+                  onPress={() => {
+                    Alert.alert(
+                      'Worry Actions',
+                      worry.worry_text,
+                      [
+                        { text: 'Cancel', style: 'cancel' },
+                        {
+                          text: '✅ Resolve',
+                          onPress: () => handleCategorizeWorry(worry.id, 'resolved'),
+                        },
+                        {
+                          text: '🍃 Let Go',
+                          onPress: () => handleCategorizeWorry(worry.id, 'let_go'),
+                        },
+                        {
+                          text: '🍂 Schedule',
+                          onPress: () => handleCategorizeWorry(worry.id, 'scheduled'),
+                        },
+                      ],
+                      { cancelable: true }
+                    );
+                  }}
+                >
                   <Text style={styles.worryTextSmall}>{worry.worry_text}</Text>
                   <Text style={styles.worryIntensitySmall}>⚡{worry.intensity}</Text>
-                </View>
+                </TouchableOpacity>
               ))
             )}
           </View>
@@ -274,10 +299,35 @@ export default function WorryTree() {
               <Text style={styles.emptyCategory}>No worries in this category</Text>
             ) : (
               categorizedWorries.scheduled.map((worry) => (
-                <View key={worry.id} style={styles.worryItemSmall}>
+                <TouchableOpacity
+                  key={worry.id}
+                  style={styles.worryItemSmall}
+                  onPress={() => {
+                    Alert.alert(
+                      'Worry Actions',
+                      worry.worry_text,
+                      [
+                        { text: 'Cancel', style: 'cancel' },
+                        {
+                          text: '✅ Resolve',
+                          onPress: () => handleCategorizeWorry(worry.id, 'resolved'),
+                        },
+                        {
+                          text: '🍃 Let Go',
+                          onPress: () => handleCategorizeWorry(worry.id, 'let_go'),
+                        },
+                        {
+                          text: '🌱 Take Action',
+                          onPress: () => handleCategorizeWorry(worry.id, 'take_action'),
+                        },
+                      ],
+                      { cancelable: true }
+                    );
+                  }}
+                >
                   <Text style={styles.worryTextSmall}>{worry.worry_text}</Text>
                   <Text style={styles.worryIntensitySmall}>⚡{worry.intensity}</Text>
-                </View>
+                </TouchableOpacity>
               ))
             )}
           </View>
@@ -295,10 +345,31 @@ export default function WorryTree() {
               <Text style={styles.emptyCategory}>No resolved worries yet</Text>
             ) : (
               categorizedWorries.resolved.map((worry) => (
-                <View key={worry.id} style={[styles.worryItemSmall, styles.worryResolved]}>
+                <TouchableOpacity
+                  key={worry.id}
+                  style={[styles.worryItemSmall, styles.worryResolved]}
+                  onPress={() => {
+                    Alert.alert(
+                      'Resolved Worry',
+                      worry.worry_text,
+                      [
+                        { text: 'OK', style: 'cancel' },
+                        {
+                          text: 'Move to Let Go',
+                          onPress: () => handleCategorizeWorry(worry.id, 'let_go'),
+                        },
+                        {
+                          text: 'Move to Action',
+                          onPress: () => handleCategorizeWorry(worry.id, 'take_action'),
+                        },
+                      ],
+                      { cancelable: true }
+                    );
+                  }}
+                >
                   <Text style={[styles.worryTextSmall, styles.worryTextResolved]}>{worry.worry_text}</Text>
                   <Text style={styles.worryIntensitySmall}>⚡{worry.intensity}</Text>
-                </View>
+                </TouchableOpacity>
               ))
             )}
           </View>
