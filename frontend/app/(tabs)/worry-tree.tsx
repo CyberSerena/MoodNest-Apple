@@ -190,37 +190,92 @@ export default function WorryTree() {
           </View>
         )}
 
-        {/* Worry Categories Guide */}
-        <View style={styles.guideContainer}>
-          <Text style={styles.guideTitle}>🌳 Your Worry Tree Guide</Text>
-          <View style={styles.categoriesGrid}>
-            <TouchableOpacity style={styles.categoryCard}>
+        {/* Worry Categories with Actual Worries */}
+        <View style={styles.categoriesContainer}>
+          <Text style={styles.categoriesTitle}>🌳 Your Worry Categories</Text>
+          
+          {/* Let Go Category */}
+          <View style={styles.categorySection}>
+            <View style={styles.categoryHeader}>
               <Text style={styles.categoryIcon}>🍃</Text>
-              <Text style={styles.categoryTitle}>Let Go</Text>
-              <Text style={styles.categoryCount}>{categorizedWorries.let_go.length} active</Text>
-              <Text style={styles.categoryDesc}>Can't control it</Text>
-            </TouchableOpacity>
+              <View style={styles.categoryHeaderText}>
+                <Text style={styles.categoryTitle}>Let Go ({categorizedWorries.let_go.length})</Text>
+                <Text style={styles.categoryDesc}>Can't control it - release the worry</Text>
+              </View>
+            </View>
+            {categorizedWorries.let_go.length === 0 ? (
+              <Text style={styles.emptyCategory}>No worries in this category</Text>
+            ) : (
+              categorizedWorries.let_go.map((worry) => (
+                <View key={worry.id} style={styles.worryItemSmall}>
+                  <Text style={styles.worryTextSmall}>{worry.worry_text}</Text>
+                  <Text style={styles.worryIntensitySmall}>⚡{worry.intensity}</Text>
+                </View>
+              ))
+            )}
+          </View>
 
-            <TouchableOpacity style={styles.categoryCard}>
+          {/* Take Action Category */}
+          <View style={styles.categorySection}>
+            <View style={styles.categoryHeader}>
               <Text style={styles.categoryIcon}>🌱</Text>
-              <Text style={styles.categoryTitle}>Take Action</Text>
-              <Text style={styles.categoryCount}>{categorizedWorries.take_action.length} active</Text>
-              <Text style={styles.categoryDesc}>Act on it now</Text>
-            </TouchableOpacity>
+              <View style={styles.categoryHeaderText}>
+                <Text style={styles.categoryTitle}>Take Action ({categorizedWorries.take_action.length})</Text>
+                <Text style={styles.categoryDesc}>You can do something about this</Text>
+              </View>
+            </View>
+            {categorizedWorries.take_action.length === 0 ? (
+              <Text style={styles.emptyCategory}>No worries in this category</Text>
+            ) : (
+              categorizedWorries.take_action.map((worry) => (
+                <View key={worry.id} style={styles.worryItemSmall}>
+                  <Text style={styles.worryTextSmall}>{worry.worry_text}</Text>
+                  <Text style={styles.worryIntensitySmall}>⚡{worry.intensity}</Text>
+                </View>
+              ))
+            )}
+          </View>
 
-            <TouchableOpacity style={styles.categoryCard}>
+          {/* Scheduled Category */}
+          <View style={styles.categorySection}>
+            <View style={styles.categoryHeader}>
               <Text style={styles.categoryIcon}>🍂</Text>
-              <Text style={styles.categoryTitle}>Scheduled</Text>
-              <Text style={styles.categoryCount}>{categorizedWorries.scheduled.length} active</Text>
-              <Text style={styles.categoryDesc}>Deal with later</Text>
-            </TouchableOpacity>
+              <View style={styles.categoryHeaderText}>
+                <Text style={styles.categoryTitle}>Scheduled ({categorizedWorries.scheduled.length})</Text>
+                <Text style={styles.categoryDesc}>Deal with it later</Text>
+              </View>
+            </View>
+            {categorizedWorries.scheduled.length === 0 ? (
+              <Text style={styles.emptyCategory}>No worries in this category</Text>
+            ) : (
+              categorizedWorries.scheduled.map((worry) => (
+                <View key={worry.id} style={styles.worryItemSmall}>
+                  <Text style={styles.worryTextSmall}>{worry.worry_text}</Text>
+                  <Text style={styles.worryIntensitySmall}>⚡{worry.intensity}</Text>
+                </View>
+              ))
+            )}
+          </View>
 
-            <TouchableOpacity style={styles.categoryCard}>
+          {/* Resolved Category */}
+          <View style={styles.categorySection}>
+            <View style={styles.categoryHeader}>
               <Text style={styles.categoryIcon}>✅</Text>
-              <Text style={styles.categoryTitle}>Resolved</Text>
-              <Text style={styles.categoryCount}>{categorizedWorries.resolved.length} released</Text>
-              <Text style={styles.categoryDesc}>Peace achieved</Text>
-            </TouchableOpacity>
+              <View style={styles.categoryHeaderText}>
+                <Text style={styles.categoryTitle}>Resolved ({categorizedWorries.resolved.length})</Text>
+                <Text style={styles.categoryDesc}>Peace achieved!</Text>
+              </View>
+            </View>
+            {categorizedWorries.resolved.length === 0 ? (
+              <Text style={styles.emptyCategory}>No resolved worries yet</Text>
+            ) : (
+              categorizedWorries.resolved.map((worry) => (
+                <View key={worry.id} style={[styles.worryItemSmall, styles.worryResolved]}>
+                  <Text style={[styles.worryTextSmall, styles.worryTextResolved]}>{worry.worry_text}</Text>
+                  <Text style={styles.worryIntensitySmall}>⚡{worry.intensity}</Text>
+                </View>
+              ))
+            )}
           </View>
         </View>
 
