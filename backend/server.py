@@ -502,7 +502,8 @@ async def get_worries(user = Depends(get_current_user)):
             category=worry["category"],
             intensity=worry["intensity"],
             created_at=worry["created_at"],
-            resolved_at=worry.get("resolved_at")
+            resolved_at=worry.get("resolved_at"),
+            resolution_note=worry.get("resolution_note")
         )
         for worry in worries
     ]
