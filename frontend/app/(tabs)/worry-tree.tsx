@@ -29,6 +29,9 @@ export default function WorryTree() {
   const [worries, setWorries] = useState<Worry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showNewWorryModal, setShowNewWorryModal] = useState(false);
+  const [showResolutionModal, setShowResolutionModal] = useState(false);
+  const [resolvingWorry, setResolvingWorry] = useState<{ id: string; text: string } | null>(null);
+  const [resolutionNote, setResolutionNote] = useState('');
   const [viewMode, setViewMode] = useState<'tree' | 'list'>('tree');
   const [newWorry, setNewWorry] = useState({ text: '', intensity: 5 });
 
