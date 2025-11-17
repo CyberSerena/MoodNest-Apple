@@ -369,31 +369,44 @@ export default function WorryTree() {
               <Text style={styles.emptyCategory}>No resolved worries yet</Text>
             ) : (
               categorizedWorries.resolved.map((worry) => (
-                <TouchableOpacity
-                  key={worry.id}
-                  style={[styles.worryItemSmall, styles.worryResolved]}
-                  onPress={() => {
-                    Alert.alert(
-                      'Resolved Worry',
-                      worry.worry_text,
-                      [
-                        { text: 'OK', style: 'cancel' },
-                        {
-                          text: 'Move to Let Go',
-                          onPress: () => handleCategorizeWorry(worry.id, 'let_go'),
-                        },
-                        {
-                          text: 'Move to Action',
-                          onPress: () => handleCategorizeWorry(worry.id, 'take_action'),
-                        },
-                      ],
-                      { cancelable: true }
-                    );
-                  }}
-                >
-                  <Text style={[styles.worryTextSmall, styles.worryTextResolved]}>{worry.worry_text}</Text>
-                  <Text style={styles.worryIntensitySmall}>⚡{worry.intensity}</Text>
-                </TouchableOpacity>
+                <View key={worry.id}>
+                  <TouchableOpacity
+                    style={[styles.worryItemSmall, styles.worryResolved]}
+                    onPress={() => {
+                      const resolutionText = worry.resolution_note 
+                        ? `\n\n✅ Resolution:\n"${worry.resolution_note}"`
+                        : '\n\n(No resolution note added)';
+                      
+                      Alert.alert(
+                        '✅ Resolved Worry',
+                        worry.worry_text + resolutionText,
+                        [
+                          { text: 'Close', style: 'cancel' },
+                          {
+                            text: 'Move to Let Go',
+                            onPress: () => handleCategorizeWorry(worry.id, 'let_go'),
+                          },
+                          {
+                            text: 'Move to Action',
+                            onPress: () => handleCategorizeWorry(worry.id, 'take_action'),
+                          },
+                        ],
+                        { cancelable: true }
+                      );
+                    }}
+                  >
+                    <View style={styles.resolvedWorryContent}>
+                      <Text style={[styles.worryTextSmall, styles.worryTextResolved]}>{worry.worry_text}</Text>
+                      {worry.resolution_note && (
+                        <View style={styles.resolutionIndicator}>
+                          <Ionicons name="document-text" size={14} color="#4CAF50" />
+                          <Text style={styles.resolutionIndicatorText}>Has note</Text>
+                        </View>
+                      )}
+                    </View>
+                    <Text style={styles.worryIntensitySmall}>⚡{worry.intensity}</Text>
+                  </TouchableOpacity>
+                </View>
               ))
             )}
           </View>
