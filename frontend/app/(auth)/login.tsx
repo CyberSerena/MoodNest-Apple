@@ -29,10 +29,14 @@ export default function Login() {
 
     setIsLoading(true);
     try {
+      console.log('Attempting login with:', email);
       await login(email, password);
+      console.log('Login successful, navigating to home');
       router.replace('/(tabs)/home');
     } catch (error: any) {
-      Alert.alert('Login Failed', error.response?.data?.detail || 'Invalid credentials');
+      console.error('Login error:', error);
+      const errorMsg = error.response?.data?.detail || error.message || 'Invalid credentials';
+      Alert.alert('Login Failed', errorMsg);
     } finally {
       setIsLoading(false);
     }
