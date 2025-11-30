@@ -23,10 +23,12 @@ export default function Timeline() {
         api.get(`/moods?days=${daysFilter}`),
         api.get(`/moods/stats?days=${daysFilter}`),
       ]);
-      setMoods(moodsResponse.data);
-      setStats(statsResponse.data);
+      setMoods(moodsResponse.data || []);
+      setStats(statsResponse.data || {});
     } catch (error) {
       console.error('Failed to fetch moods:', error);
+      setMoods([]);
+      setStats({});
     } finally {
       setIsLoading(false);
     }
